@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orbit Lab V2 — Gesture Experience</title>
+    <meta
+      name="description"
+      content="Experiencia interactiva de visión por computadora para controlar una galaxia con la mano en tiempo real."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <canvas id="sceneCanvas" aria-label="Escena principal espacial interactiva"></canvas>
+
+      <div class="ambient ambient--left"></div>
+      <div class="ambient ambient--right"></div>
+
+      <header class="glass hero-panel">
+        <div class="eyebrow">Vision + motion + creative coding</div>
+        <h1>Orbit Lab <span>V2</span></h1>
+        <p class="hero-copy">
+          Controla un sistema espacial con tus manos. El índice altera el campo gravitacional,
+          la palma abierta expande la galaxia, el puño comprime el núcleo y un gesto veloz
+          dispara un pulso cósmico.
+        </p>
+
+        <div class="button-row">
+          <button id="startCameraBtn" class="btn btn--primary">Iniciar cámara</button>
+          <button id="demoModeBtn" class="btn btn--secondary">Modo demo</button>
+        </div>
+
+        <div class="pill-row">
+          <span class="pill">Índice = gravedad</span>
+          <span class="pill">Palma = expansión</span>
+          <span class="pill">Puño = colapso</span>
+          <span class="pill">Swipe = burst</span>
+        </div>
+      </header>
+
+      <section class="glass status-panel">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Live system</span>
+            <h2>Estado del sistema</h2>
+          </div>
+          <span id="modePill" class="mode-pill">Orbit</span>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card">
+            <span class="metric-label">Tracking</span>
+            <strong id="trackingStatus">Esperando</strong>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">Gesto</span>
+            <strong id="gestureStatus">Sin mano</strong>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">Movimiento</span>
+            <strong id="motionStatus">Calmo</strong>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">Energía</span>
+            <strong id="energyStatus">Estable</strong>
+          </article>
+        </div>
+
+        <div class="mode-switcher" role="tablist" aria-label="Modos visuales">
+          <button class="mode-btn is-active" data-mode="orbit" role="tab" aria-selected="true">Orbit</button>
+          <button class="mode-btn" data-mode="nebula" role="tab" aria-selected="false">Nebula</button>
+        </div>
+      </section>
+
+      <section class="glass mission-panel">
+        <div class="section-head section-head--compact">
+          <div>
+            <span class="section-kicker">Interactive challenge</span>
+            <h3 id="missionTitle">Fase 1 · Detecta tu mano</h3>
+          </div>
+          <span id="missionBadge" class="mission-badge">0%</span>
+        </div>
+        <p id="missionCopy" class="mission-copy">
+          Inicia cámara o usa el modo demo. El objetivo es que la interfaz entienda el gesto y lo convierta en comportamiento digital.
+        </p>
+        <div class="progress-track" aria-hidden="true">
+          <div id="missionProgressBar" class="progress-fill"></div>
+        </div>
+      </section>
+
+      <section class="glass narrative-panel">
+        <span class="section-kicker">System narration</span>
+        <p id="narrationText">
+          El sistema está listo. Cuando detecte la mano, la escena traducirá movimiento humano en una galaxia reactiva en tiempo real.
+        </p>
+      </section>
+
+      <aside class="glass video-panel">
+        <div class="section-head section-head--compact">
+          <div>
+            <span class="section-kicker">Computer vision</span>
+            <h3>Vision HUD</h3>
+          </div>
+          <span id="cameraBadge" class="camera-badge">Offline</span>
+        </div>
+        <div class="video-wrapper">
+          <video id="inputVideo" autoplay playsinline muted></video>
+          <canvas id="handOverlay"></canvas>
+          <div class="video-grid"></div>
+          <div class="scanline"></div>
+        </div>
+      </aside>
+
+      <footer class="footer-copy">
+        <span>Move your hand. Shape the galaxy.</span>
+        <span>Esto no es magia. Es software.</span>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
